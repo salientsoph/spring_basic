@@ -1,13 +1,9 @@
-package hello.core.Order;
+package hello.core.order;
 
 import hello.core.AppConfig;
 import hello.core.member.Grade;
 import hello.core.member.Member;
 import hello.core.member.MemberService;
-import hello.core.member.MemberServiceImpl;
-import hello.core.order.Order;
-import hello.core.order.OrderService;
-import hello.core.order.OrderServiceImpl;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,4 +29,18 @@ public class OrderServiceTest {
         Order order = orderService.createOrder(memberId,"itemName", 10000);
         Assertions.assertThat(order.getDiscountPrice()).isEqualTo(1000);
     }
+
+
+    //해당 test코드는 field 주입 시 오류남 (set으로 객체 설정 필수)
+    /*
+    @Test
+    void fieldInjectionTest() {
+        OrderServiceImpl orderService1 = new OrderServiceImpl();
+        //orderService1.createOrder(1L, "item1", 10000);   //그냥 호출하면 오류남
+        orderService1.setMemberRepository(new MemoryMemberRepository());
+        orderService1.setDiscountPolicy(new FixDiscountPolicy());
+        orderService1.createOrder(1L, "item1", 10000);
+    }
+     */
+
 }
